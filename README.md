@@ -6,6 +6,8 @@ This code is licensed under the MIT License.
 
 ## About
 
+[![App Image](https://i.imgur.com/29TLiQC.png)](https://i.imgur.com/29TLiQC.png)
+
 ## Requirements
 
 This project requires the installation of:
