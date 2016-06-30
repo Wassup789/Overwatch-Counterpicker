@@ -21,7 +21,7 @@ This application simply screenshots the primary monitor (therefore why you have 
 2. Launch "Overwatch Counterpicker"
 3. Be in-game with the enemy heroes visible in the scoreboard.
 4. Hold the scoreboard button.
-5. Press G.
+5. Press the refresh key (Default: G).
 6. Enemy heroes should appear in the list view.
 
 (Note: Dead enemy heroes may appear as a different hero. Make sure all enemy heroes are alive)
@@ -31,7 +31,7 @@ This application simply screenshots the primary monitor (therefore why you have 
 1. Launch "Overwatch Counterpicker"
 2. Open up an Overwatch screenshot with the scoreboard open and make sure it is in and fits your primary monitor. (Example: [i.imgur.com/iPLJJHS.jpg](https://i.imgur.com/iPLJJHS.jpg)).
 3. Set it to fullscreen (F11)
-3. Press G
+3. Press the refresh key (Default: G).
 4. Enemy heroes should appear in the list view.
 
 ## Editing the Data
