@@ -57,7 +57,7 @@ namespace Overwatch_Team_Overview
                 for (int j = 0; j < Program.heroes.Length; j++)
                 {
                     ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
-                    switch (data[heroIndex, j])
+                    switch (data[j, heroIndex])
                     {
                         case -1:
                             subitem.Text = "Weak";
@@ -71,7 +71,7 @@ namespace Overwatch_Team_Overview
                             subitem.BackColor = Color.DarkGray;
                             break;
                     }
-                    overallValues[j] += data[heroIndex, j];
+                    overallValues[j] += data[j, heroIndex];
 
                     item.SubItems.Add(subitem);
                 }
