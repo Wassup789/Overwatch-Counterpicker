@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Overwatch_Counterpicker.JSONObjects;
 using Overwatch_Team_Overview.JSONObjects;
 
 namespace Overwatch_Team_Overview
@@ -15,7 +16,7 @@ namespace Overwatch_Team_Overview
     public partial class MainForm : Form
     {
         public Settings settings = new Settings();
-        public int[,] data;
+        public Data data = new Data();
 
         public MainForm()
         {
@@ -32,10 +33,9 @@ namespace Overwatch_Team_Overview
                 file.Close();
             }
 
-            string jsonData = File.ReadAllText("data.json");
-            data = JsonConvert.DeserializeObject<int[,]>(jsonData);
+            RefreshData();
 
-            jsonData = File.ReadAllText("settings.json");
+            String jsonData = File.ReadAllText("settings.json");
             settings = JsonConvert.DeserializeObject<Settings>(jsonData);
 
             refreshButtonValue.Text = settings.key.ToUpper();
@@ -44,6 +44,14 @@ namespace Overwatch_Team_Overview
         public void onHeroesChange()
         {
             mainListView.Items.Clear();
+
+            if (!Program.hasRefreshedOnce)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Group = mainListView.Groups[2];
+                mainListView.Items.Add(item);
+                return;
+            }
 
             int[] overallValues = new int[Program.heroes.Length];
             for (int i = 0; i < Program.currentHeroes.Length; i++)
@@ -58,7 +66,7 @@ namespace Overwatch_Team_Overview
                 for (int j = 0; j < Program.heroes.Length; j++)
                 {
                     ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
-                    switch (data[j, heroIndex])
+                    switch (data.data[j, heroIndex])
                     {
                         case -1:
                             subitem.Text = "Weak";
@@ -72,7 +80,7 @@ namespace Overwatch_Team_Overview
                             subitem.BackColor = Color.DarkGray;
                             break;
                     }
-                    overallValues[j] += data[j, heroIndex];
+                    overallValues[j] += data.data[j, heroIndex];
 
                     item.SubItems.Add(subitem);
                 }
@@ -135,7 +143,8 @@ namespace Overwatch_Team_Overview
 
         private void dataStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.youtube.com/watch?v=ZAEdu9VCbLQ");
+            if(data.link != "" && VerifyURL(data.link))
+                System.Diagnostics.Process.Start(data.link);
         }
 
         private void wassup789StripMenuItem_Click(object sender, EventArgs e)
@@ -146,6 +155,30 @@ namespace Overwatch_Team_Overview
         private void versionStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://github.com/Wassup789/Overwatch-Counterpicker/");
+        }
+
+        public static bool VerifyURL(string source)
+        {
+            Uri uriResult;
+            return Uri.TryCreate(source, UriKind.Absolute, out uriResult) && (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
+        }
+
+        public void RefreshData()
+        {
+            string jsonData = File.ReadAllText("data.json");
+            data = JsonConvert.DeserializeObject<Data>(jsonData);
+            if (data.creator == "")
+                data.creator = "Unknown";
+
+            dataStripMenuItem.Text = "Data by " + data.creator;
+            mainListView.Groups[0].Header = "Enemies (Data by " + data.creator + ")";
+
+            onHeroesChange();
+        }
+
+        private void reloadDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }

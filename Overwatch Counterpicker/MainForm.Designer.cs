@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Enemies (Data by Fallout)", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Enemies (Data by Unknown)", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Overall", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Waiting for User to Refresh", System.Windows.Forms.HorizontalAlignment.Left);
             this.mainListView = new System.Windows.Forms.ListView();
             this.columnHeaderEnemy = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -64,7 +65,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.viewInstructionsButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reloadDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wassup789StripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +75,7 @@
             this.settingsGroupBox.SuspendLayout();
             this.requirementsGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.mainMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainListView
@@ -102,13 +105,16 @@
             this.columnHeader19,
             this.columnHeader20,
             this.columnHeader21});
-            listViewGroup1.Header = "Enemies (Data by Fallout)";
+            listViewGroup1.Header = "Enemies (Data by Unknown)";
             listViewGroup1.Name = "listViewGroupEnemy";
             listViewGroup2.Header = "Overall";
             listViewGroup2.Name = "listViewGroupOverall";
+            listViewGroup3.Header = "Waiting for User to Refresh";
+            listViewGroup3.Name = "listViewGroupWaiting";
             this.mainListView.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
             listViewGroup1,
-            listViewGroup2});
+            listViewGroup2,
+            listViewGroup3});
             this.mainListView.Location = new System.Drawing.Point(12, 27);
             this.mainListView.Name = "mainListView";
             this.mainListView.Size = new System.Drawing.Size(1328, 220);
@@ -380,15 +386,32 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Instructions";
             // 
-            // menuStrip1
+            // mainMenuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mainMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolsToolStripMenuItem,
             this.aboutToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1352, 24);
-            this.menuStrip1.TabIndex = 7;
-            this.menuStrip1.Text = "menuStrip1";
+            this.mainMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuStrip.Name = "mainMenuStrip";
+            this.mainMenuStrip.Size = new System.Drawing.Size(1352, 24);
+            this.mainMenuStrip.TabIndex = 7;
+            this.mainMenuStrip.Text = "menuStrip1";
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reloadDataToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // reloadDataToolStripMenuItem
+            // 
+            this.reloadDataToolStripMenuItem.Name = "reloadDataToolStripMenuItem";
+            this.reloadDataToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.reloadDataToolStripMenuItem.Text = "Reload Data";
+            this.reloadDataToolStripMenuItem.ToolTipText = "Reloads the data.json file";
+            this.reloadDataToolStripMenuItem.Click += new System.EventHandler(this.reloadDataToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -403,22 +426,22 @@
             // versionStripMenuItem
             // 
             this.versionStripMenuItem.Name = "versionStripMenuItem";
-            this.versionStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.versionStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.versionStripMenuItem.Text = "Version 1.0.0.0";
             this.versionStripMenuItem.Click += new System.EventHandler(this.versionStripMenuItem_Click);
             // 
             // wassup789StripMenuItem
             // 
             this.wassup789StripMenuItem.Name = "wassup789StripMenuItem";
-            this.wassup789StripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.wassup789StripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.wassup789StripMenuItem.Text = "by Wassup789";
             this.wassup789StripMenuItem.Click += new System.EventHandler(this.wassup789StripMenuItem_Click);
             // 
             // dataStripMenuItem
             // 
             this.dataStripMenuItem.Name = "dataStripMenuItem";
-            this.dataStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.dataStripMenuItem.Text = "Data by Fallout";
+            this.dataStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.dataStripMenuItem.Text = "Data by Unknown";
             this.dataStripMenuItem.Click += new System.EventHandler(this.dataStripMenuItem_Click);
             // 
             // MainForm
@@ -430,9 +453,9 @@
             this.Controls.Add(this.requirementsGroupBox);
             this.Controls.Add(this.settingsGroupBox);
             this.Controls.Add(this.mainListView);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.mainMenuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.mainMenuStrip;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Overwatch Counterpicker";
@@ -442,8 +465,8 @@
             this.requirementsGroupBox.ResumeLayout(false);
             this.requirementsGroupBox.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.mainMenuStrip.ResumeLayout(false);
+            this.mainMenuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -485,11 +508,13 @@
         private System.Windows.Forms.Button saveSettingsButton;
         private System.Windows.Forms.Button viewInstructionsButton;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip mainMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem versionStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wassup789StripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dataStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reloadDataToolStripMenuItem;
     }
 }
 

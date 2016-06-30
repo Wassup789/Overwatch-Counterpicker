@@ -40,10 +40,10 @@ namespace Overwatch_Team_Overview
             }
         }
 
-        public static readonly int testingSizeX = 60;
-        public static readonly int testingSizeY = 40;
+        private static readonly int testingSizeX = 60;
+        private static readonly int testingSizeY = 40;
 
-        public static readonly int[][] positions = new int[][]
+        private static readonly int[][] positions = new int[][]
         {
             new int[] {415, 290},// X travels +206
             new int[] {621, 290},
@@ -78,6 +78,7 @@ namespace Overwatch_Team_Overview
         };
 
         public static int[] currentHeroes = new int[6];
+        public static Boolean hasRefreshedOnce = false;
 
         public static void CompareImages(Bitmap screenshot)
         {
@@ -100,9 +101,10 @@ namespace Overwatch_Team_Overview
             for (int i = 0; i < positions.Length; i++)
             {
                 int index = GetSmallestValue(percentages[i]);
-                Console.WriteLine("Enemy #{0} is: {1}, their percentage value is: {2}% and accuracy is: {3}", i, heroes[index], percentages[i][index][0], percentages[i][index][1]);
+                Console.WriteLine("Enemy #{0} is: {1}, their percentage value is: {2}% and accuracy is: {3}%", i, heroes[index], (100-percentages[i][index][0]), (100-percentages[i][index][1]));
                 currentHeroes[i] = index;
             }
+            hasRefreshedOnce = true;
             mainForm.onHeroesChange();
         }
 
@@ -148,6 +150,7 @@ namespace Overwatch_Team_Overview
                 changeInR += (image1[i].R - image2[i].R);
                 changeInG += (image1[i].G - image2[i].G);
                 changeInB += (image1[i].R - image2[i].B);
+
                 if ((image1[i].R - image2[i].R < 10 && image1[i].R - image2[i].R > -10) &&
                     (image1[i].G - image2[i].G < 10 && image1[i].G - image2[i].G > -10) &&
                     (image1[i].B - image2[i].B < 10 && image1[i].B - image2[i].B > -10))
@@ -157,7 +160,7 @@ namespace Overwatch_Team_Overview
             changeInG = Math.Abs(changeInG/image1.Count)/255.0*100.0;
             changeInB = Math.Abs(changeInB/image1.Count)/255.0*100.0;
 
-            return new double[] {(changeInR + changeInG + changeInB)/3.0, accuracy};
+            return new double[] {(changeInR + changeInG + changeInB)/3.0, (accuracy/image1.Count*100.0)};
         }
 
         public static void TakeScreenshot()

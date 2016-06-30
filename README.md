@@ -71,13 +71,13 @@ The data.json file include is a two-dimensional array *(aka table)* where the ro
 
 #### For example...
 
-In the data.json file, line #2:
+In the data.json file, line #5:
 
  - The enemy plays as Genji
  - The values correspond to how well the enemy (Genji) will do against the other heroes (Use the heroes list above for guidance).
 
-For line #3, the player now plays McCree.
-For line #4, the player plays Pharah instead, etc.
+For line #6, the player now plays McCree.
+For line #7, the player plays Pharah instead, etc.
 
 ## Downloads
 **Latest Version:** ***[vX.X.X.X][Dld_Latest]***
