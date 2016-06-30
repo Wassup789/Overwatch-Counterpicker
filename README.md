@@ -13,7 +13,7 @@ This code is licensed under the MIT License.
 This project requires the installation of:
 
  - Windows with [.NET Framework v4.0+](https://www.microsoft.com/en-ca/download/details.aspx?id=17851)
- - Strongly recommended, a 1920x1080 monitor (Other resolutions have not been tested)
+ - Recommended, a 1920x1080 monitor (Other resolutions have not been tested yet)
 
 ## Regarding Getting Banned
 This application simply screenshots the primary monitor (therefore why you have to play in borderless windowed) and separates the screenshot in six images and compares the likeliness of the images to the Overwatch heroes. **This application does not hook to the Overwatch game or the Battle.net client in any way, shape or form.**
@@ -73,8 +73,8 @@ The data.json file include is a two-dimensional array *(aka table)* where the ro
 
 In the data.json file, line #2:
 
- - The Player plays as Genji
- - The values correspond to how well the player will do against the other heroes playing as Genji
+ - The enemy plays as Genji
+ - The values correspond to how well the enemy (Genji) will do against the other heroes (Use the heroes list above for guidance).
 
 For line #3, the player now plays McCree.
 For line #4, the player plays Pharah instead, etc.
