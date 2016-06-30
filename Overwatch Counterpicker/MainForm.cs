@@ -14,8 +14,9 @@ namespace Overwatch_Team_Overview
 {
     public partial class MainForm : Form
     {
-        private static Settings settings;
+        public Settings settings = new Settings();
         public int[,] data;
+
         public MainForm()
         {
             InitializeComponent();

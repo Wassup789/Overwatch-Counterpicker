@@ -35,7 +35,7 @@ namespace Overwatch_Team_Overview
         private static void GlobalHookKeyPress(object sender, KeyPressEventArgs e)
         {
             // User has pressed the G key
-            if (e.KeyChar == 'g') {
+            if (e.KeyChar == mainForm.settings.key.ToCharArray()[0]) {
                 TakeScreenshot();
             }
         }

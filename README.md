@@ -26,7 +26,7 @@ This application simply screenshots the primary monitor (therefore why you have 
 
 (Note: Dead enemy heroes may appear as a different hero. Make sure all enemy heroes are alive)
 
-### Testing Without the Overwatch Game
+#### Testing Without the Overwatch Game
 
 1. Launch "Overwatch Counterpicker"
 2. Open up an Overwatch screenshot with the scoreboard open and make sure it is in and fits your primary monitor. (Example: [i.imgur.com/iPLJJHS.jpg](https://i.imgur.com/iPLJJHS.jpg)).
