@@ -39,6 +39,16 @@ namespace Overwatch_Team_Overview
             MinimumSize = new Size(800, this.Height);
             MaximumSize = new Size(Screen.AllScreens.Max(s => s.Bounds.Width), this.Height);
 
+            for (int i = 0; i < Program.heroes.Length; i++)
+            {
+                enemy0ComboBox.Items.Add(Program.GetHeroName(i));
+                enemy1ComboBox.Items.Add(Program.GetHeroName(i));
+                enemy2ComboBox.Items.Add(Program.GetHeroName(i));
+                enemy3ComboBox.Items.Add(Program.GetHeroName(i));
+                enemy4ComboBox.Items.Add(Program.GetHeroName(i));
+                enemy5ComboBox.Items.Add(Program.GetHeroName(i));
+            }
+
             RefreshData();
 
             String jsonData = File.ReadAllText("settings.json");
@@ -120,6 +130,15 @@ namespace Overwatch_Team_Overview
                 itemOverall.SubItems.Add(subitem);
             }
             mainListView.Items.Add(itemOverall);
+
+            //Change the combo boxes
+            enemy0ComboBox.SelectedIndex = Program.currentHeroes[0];
+            enemy1ComboBox.SelectedIndex = Program.currentHeroes[1];
+            enemy2ComboBox.SelectedIndex = Program.currentHeroes[2];
+            enemy3ComboBox.SelectedIndex = Program.currentHeroes[3];
+            enemy4ComboBox.SelectedIndex = Program.currentHeroes[4];
+            enemy5ComboBox.SelectedIndex = Program.currentHeroes[5];
+
             MainForm_ResizeEnd(null, null);
         }
 
@@ -207,6 +226,47 @@ namespace Overwatch_Team_Overview
             {
                 column.Width = -2;
             }
+        }
+
+        private void debugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Program.debug = true;
+        }
+
+        private void enemy0ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            changeHero(0, enemy0ComboBox.SelectedIndex);
+        }
+
+        private void enemy1ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            changeHero(1, enemy1ComboBox.SelectedIndex);
+        }
+
+        private void enemy2ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            changeHero(2, enemy2ComboBox.SelectedIndex);
+        }
+
+        private void enemy3ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            changeHero(3, enemy3ComboBox.SelectedIndex);
+        }
+
+        private void enemy4ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            changeHero(4, enemy4ComboBox.SelectedIndex);
+        }
+
+        private void enemy5ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            changeHero(5, enemy5ComboBox.SelectedIndex);
+        }
+
+        public void changeHero(int currentHeroIndex, int heroIndex)
+        {
+            Program.currentHeroes[currentHeroIndex] = heroIndex;
+            onHeroesChange();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Overwatch_Team_Overview
     {
         public static IKeyboardMouseEvents m_GlobalHook;
         public static MainForm mainForm;
+        public static bool debug = false;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -38,6 +39,8 @@ namespace Overwatch_Team_Overview
             if (e.KeyChar == mainForm.settings.key.ToCharArray()[0]) {
                 TakeScreenshot();
             }
+            if (e.KeyChar == ']' && debug)
+                TakeScreenshotAsset();
         }
 
         private static readonly int testingSizeX = 60;
@@ -46,7 +49,7 @@ namespace Overwatch_Team_Overview
         private static readonly int[][] positions = new int[][]
         {
             new int[] {415, 290},// X travels +206
-            new int[] {621, 290},
+            new int[] {621, 290},// Bottom Y is 595
             new int[] {827, 290},
             new int[] {1033, 290},
             new int[] {1239, 290},
@@ -93,14 +96,27 @@ namespace Overwatch_Team_Overview
                         percentages[i] = new double[heroes.Length][];
 
                     Bitmap source = new Bitmap("assets/" + heroes[j] + ".png");
-                    List<Color> colorsDebug = GetBitmapColors(cropped);
+                    Bitmap source_dead = new Bitmap("assets/" + heroes[j] + "_dead.png");
+                    List<Color> colorsTest = GetBitmapColors(cropped);
                     List<Color> colorsSource = GetBitmapColors(source);
-                    percentages[i][j] = CompareColors(colorsSource, colorsDebug);
+                    List<Color> colorsSourceDead = GetBitmapColors(source_dead);
+
+                    double[][] results = 
+                    {
+                        CompareColors(colorsSource, colorsTest),
+                        CompareColors(colorsSourceDead, colorsTest)
+                    };
+                    percentages[i][j] = results[GetBestValue(results)];
+                    if (i == 1)
+                    {
+                        Console.WriteLine(heroes[j] + percentages[i][j][0]);
+                        Console.WriteLine(heroes[j] + percentages[i][j][1]);
+                    }
                 }
             }
             for (int i = 0; i < positions.Length; i++)
             {
-                int index = GetSmallestValue(percentages[i]);
+                int index = GetBestValue(percentages[i]);
                 Console.WriteLine("Enemy #{0} is: {1}, their percentage value is: {2}% and accuracy is: {3}%", i, heroes[index], (100-percentages[i][index][0]), (100-percentages[i][index][1]));
                 currentHeroes[i] = index;
             }
@@ -109,15 +125,15 @@ namespace Overwatch_Team_Overview
         }
 
         //Index, value
-        public static int GetSmallestValue(double[][] array)
+        public static int GetBestValue(double[][] array)
         {
-            double[] smallestArr = array[0];
+            double[] bestArr = array[0];
             int index = 0;
             for (int i = 1; i < array.Length; i++)
             {
-                if (array[i][1] > smallestArr[1])
+                if (array[i][1] > bestArr[1])
                 {
-                    smallestArr = array[i];
+                    bestArr = array[i];
                     index = i;
                 }
             }
@@ -177,6 +193,18 @@ namespace Overwatch_Team_Overview
                 bmpScreenshot = ResizeImage(bmpScreenshot, new Size(1920, 1080));
             
             CompareImages(bmpScreenshot);
+        }
+
+        public static void TakeScreenshotAsset()
+        {
+            var bmpScreenshot = new Bitmap(testingSizeX,
+                                           testingSizeY,
+                                           PixelFormat.Format32bppArgb);
+
+            var graphicsScreenshot = Graphics.FromImage(bmpScreenshot);
+            graphicsScreenshot.CopyFromScreen(415, 595, 0, 0, new Size(testingSizeX, testingSizeY), CopyPixelOperation.SourceCopy);
+
+            bmpScreenshot.Save("asset_" + (int) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds + ".png", ImageFormat.Png);
         }
 
         public static Bitmap ResizeImage(Bitmap imgToResize, Size size)

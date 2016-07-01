@@ -6,7 +6,7 @@ This code is licensed under the MIT License.
 
 ## About
 
-[![App Image](https://i.imgur.com/UkgjGHm.png)](https://i.imgur.com/UkgjGHm.png)
+[![App Image](https://i.imgur.com/IteY1sY.png)](https://i.imgur.com/IteY1sY.png)
 
 ## Requirements
 

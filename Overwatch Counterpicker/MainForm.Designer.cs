@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Enemies (Data by Unknown)", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Overall", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Waiting for User to Refresh", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup16 = new System.Windows.Forms.ListViewGroup("Enemies (Data by Unknown)", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup17 = new System.Windows.Forms.ListViewGroup("Overall", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup18 = new System.Windows.Forms.ListViewGroup("Waiting for User to Refresh", System.Windows.Forms.HorizontalAlignment.Left);
             this.mainListView = new System.Windows.Forms.ListView();
             this.columnHeaderEnemy = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -69,14 +69,23 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reloadDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wassup789StripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manualGroupBox = new System.Windows.Forms.GroupBox();
+            this.enemy0ComboBox = new System.Windows.Forms.ComboBox();
+            this.enemy1ComboBox = new System.Windows.Forms.ComboBox();
+            this.enemy2ComboBox = new System.Windows.Forms.ComboBox();
+            this.enemy3ComboBox = new System.Windows.Forms.ComboBox();
+            this.enemy4ComboBox = new System.Windows.Forms.ComboBox();
+            this.enemy5ComboBox = new System.Windows.Forms.ComboBox();
             this.settingsGroupBox.SuspendLayout();
             this.requirementsGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.mainMenuStrip.SuspendLayout();
+            this.manualGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainListView
@@ -107,16 +116,16 @@
             this.columnHeader19,
             this.columnHeader20,
             this.columnHeader21});
-            listViewGroup1.Header = "Enemies (Data by Unknown)";
-            listViewGroup1.Name = "listViewGroupEnemy";
-            listViewGroup2.Header = "Overall";
-            listViewGroup2.Name = "listViewGroupOverall";
-            listViewGroup3.Header = "Waiting for User to Refresh";
-            listViewGroup3.Name = "listViewGroupWaiting";
+            listViewGroup16.Header = "Enemies (Data by Unknown)";
+            listViewGroup16.Name = "listViewGroupEnemy";
+            listViewGroup17.Header = "Overall";
+            listViewGroup17.Name = "listViewGroupOverall";
+            listViewGroup18.Header = "Waiting for User to Refresh";
+            listViewGroup18.Name = "listViewGroupWaiting";
             this.mainListView.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2,
-            listViewGroup3});
+            listViewGroup16,
+            listViewGroup17,
+            listViewGroup18});
             this.mainListView.Location = new System.Drawing.Point(12, 27);
             this.mainListView.Name = "mainListView";
             this.mainListView.Size = new System.Drawing.Size(1328, 210);
@@ -404,7 +413,8 @@
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editDataToolStripMenuItem,
-            this.reloadDataToolStripMenuItem});
+            this.reloadDataToolStripMenuItem,
+            this.debugToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -412,17 +422,24 @@
             // editDataToolStripMenuItem
             // 
             this.editDataToolStripMenuItem.Name = "editDataToolStripMenuItem";
-            this.editDataToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.editDataToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.editDataToolStripMenuItem.Text = "Edit Data";
             this.editDataToolStripMenuItem.Click += new System.EventHandler(this.editDataToolStripMenuItem_Click);
             // 
             // reloadDataToolStripMenuItem
             // 
             this.reloadDataToolStripMenuItem.Name = "reloadDataToolStripMenuItem";
-            this.reloadDataToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.reloadDataToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.reloadDataToolStripMenuItem.Text = "Reload Data";
             this.reloadDataToolStripMenuItem.ToolTipText = "Reloads the data.json file";
             this.reloadDataToolStripMenuItem.Click += new System.EventHandler(this.reloadDataToolStripMenuItem_Click);
+            // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.debugToolStripMenuItem.Text = "Debug Mode";
+            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -455,11 +472,81 @@
             this.dataStripMenuItem.Text = "Data by Unknown";
             this.dataStripMenuItem.Click += new System.EventHandler(this.dataStripMenuItem_Click);
             // 
+            // manualGroupBox
+            // 
+            this.manualGroupBox.Controls.Add(this.enemy5ComboBox);
+            this.manualGroupBox.Controls.Add(this.enemy4ComboBox);
+            this.manualGroupBox.Controls.Add(this.enemy3ComboBox);
+            this.manualGroupBox.Controls.Add(this.enemy2ComboBox);
+            this.manualGroupBox.Controls.Add(this.enemy1ComboBox);
+            this.manualGroupBox.Controls.Add(this.enemy0ComboBox);
+            this.manualGroupBox.Location = new System.Drawing.Point(476, 243);
+            this.manualGroupBox.Name = "manualGroupBox";
+            this.manualGroupBox.Size = new System.Drawing.Size(571, 62);
+            this.manualGroupBox.TabIndex = 8;
+            this.manualGroupBox.TabStop = false;
+            this.manualGroupBox.Text = "Manual Edit";
+            // 
+            // enemy0ComboBox
+            // 
+            this.enemy0ComboBox.FormattingEnabled = true;
+            this.enemy0ComboBox.Location = new System.Drawing.Point(6, 22);
+            this.enemy0ComboBox.Name = "enemy0ComboBox";
+            this.enemy0ComboBox.Size = new System.Drawing.Size(85, 21);
+            this.enemy0ComboBox.TabIndex = 0;
+            this.enemy0ComboBox.SelectedIndexChanged += new System.EventHandler(this.enemy0ComboBox_SelectedIndexChanged);
+            // 
+            // enemy1ComboBox
+            // 
+            this.enemy1ComboBox.FormattingEnabled = true;
+            this.enemy1ComboBox.Location = new System.Drawing.Point(97, 22);
+            this.enemy1ComboBox.Name = "enemy1ComboBox";
+            this.enemy1ComboBox.Size = new System.Drawing.Size(85, 21);
+            this.enemy1ComboBox.TabIndex = 1;
+            this.enemy1ComboBox.SelectedIndexChanged += new System.EventHandler(this.enemy1ComboBox_SelectedIndexChanged);
+            // 
+            // enemy2ComboBox
+            // 
+            this.enemy2ComboBox.FormattingEnabled = true;
+            this.enemy2ComboBox.Location = new System.Drawing.Point(188, 22);
+            this.enemy2ComboBox.Name = "enemy2ComboBox";
+            this.enemy2ComboBox.Size = new System.Drawing.Size(85, 21);
+            this.enemy2ComboBox.TabIndex = 2;
+            this.enemy2ComboBox.SelectedIndexChanged += new System.EventHandler(this.enemy2ComboBox_SelectedIndexChanged);
+            // 
+            // enemy3ComboBox
+            // 
+            this.enemy3ComboBox.FormattingEnabled = true;
+            this.enemy3ComboBox.Location = new System.Drawing.Point(279, 22);
+            this.enemy3ComboBox.Name = "enemy3ComboBox";
+            this.enemy3ComboBox.Size = new System.Drawing.Size(85, 21);
+            this.enemy3ComboBox.TabIndex = 3;
+            this.enemy3ComboBox.SelectedIndexChanged += new System.EventHandler(this.enemy3ComboBox_SelectedIndexChanged);
+            // 
+            // enemy4ComboBox
+            // 
+            this.enemy4ComboBox.FormattingEnabled = true;
+            this.enemy4ComboBox.Location = new System.Drawing.Point(370, 22);
+            this.enemy4ComboBox.Name = "enemy4ComboBox";
+            this.enemy4ComboBox.Size = new System.Drawing.Size(85, 21);
+            this.enemy4ComboBox.TabIndex = 4;
+            this.enemy4ComboBox.SelectedIndexChanged += new System.EventHandler(this.enemy4ComboBox_SelectedIndexChanged);
+            // 
+            // enemy5ComboBox
+            // 
+            this.enemy5ComboBox.FormattingEnabled = true;
+            this.enemy5ComboBox.Location = new System.Drawing.Point(461, 22);
+            this.enemy5ComboBox.Name = "enemy5ComboBox";
+            this.enemy5ComboBox.Size = new System.Drawing.Size(85, 21);
+            this.enemy5ComboBox.TabIndex = 5;
+            this.enemy5ComboBox.SelectedIndexChanged += new System.EventHandler(this.enemy5ComboBox_SelectedIndexChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1352, 311);
+            this.Controls.Add(this.manualGroupBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.requirementsGroupBox);
             this.Controls.Add(this.settingsGroupBox);
@@ -478,6 +565,7 @@
             this.groupBox1.ResumeLayout(false);
             this.mainMenuStrip.ResumeLayout(false);
             this.mainMenuStrip.PerformLayout();
+            this.manualGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -527,6 +615,14 @@
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reloadDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
+        private System.Windows.Forms.GroupBox manualGroupBox;
+        private System.Windows.Forms.ComboBox enemy0ComboBox;
+        private System.Windows.Forms.ComboBox enemy4ComboBox;
+        private System.Windows.Forms.ComboBox enemy3ComboBox;
+        private System.Windows.Forms.ComboBox enemy2ComboBox;
+        private System.Windows.Forms.ComboBox enemy1ComboBox;
+        private System.Windows.Forms.ComboBox enemy5ComboBox;
     }
 }
 
