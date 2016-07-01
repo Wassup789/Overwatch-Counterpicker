@@ -6,7 +6,7 @@ This code is licensed under the MIT License.
 
 ## About
 
-[![App Image](https://i.imgur.com/29TLiQC.png)](https://i.imgur.com/29TLiQC.png)
+[![App Image](https://i.imgur.com/UkgjGHm.png)](https://i.imgur.com/UkgjGHm.png)
 
 ## Requirements
 
@@ -38,7 +38,7 @@ This application simply screenshots the primary monitor (therefore why you have 
 
 ## Editing the Data
 
-The counterpick data can be edited by launching "Overwatch Picker, and going to: Tools->Edit Data.
+The counterpick data can be edited by launching "Overwatch Picker", and going to: Tools->Edit Data.
 
 The first column will correspond to the hero you will be playing. The other columns will determine how well this hero will do against other heroes.
 
