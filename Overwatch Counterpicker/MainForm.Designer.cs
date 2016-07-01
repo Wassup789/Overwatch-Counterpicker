@@ -67,6 +67,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.mainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reloadDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,7 +81,8 @@
             // 
             // mainListView
             // 
-            this.mainListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.mainListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mainListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderEnemy,
@@ -117,7 +119,7 @@
             listViewGroup3});
             this.mainListView.Location = new System.Drawing.Point(12, 27);
             this.mainListView.Name = "mainListView";
-            this.mainListView.Size = new System.Drawing.Size(1328, 220);
+            this.mainListView.Size = new System.Drawing.Size(1328, 210);
             this.mainListView.TabIndex = 0;
             this.mainListView.UseCompatibleStateImageBehavior = false;
             this.mainListView.View = System.Windows.Forms.View.Details;
@@ -234,10 +236,11 @@
             // 
             // settingsGroupBox
             // 
+            this.settingsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.settingsGroupBox.Controls.Add(this.saveSettingsButton);
             this.settingsGroupBox.Controls.Add(this.refreshButtonValue);
             this.settingsGroupBox.Controls.Add(this.label6);
-            this.settingsGroupBox.Location = new System.Drawing.Point(12, 253);
+            this.settingsGroupBox.Location = new System.Drawing.Point(12, 243);
             this.settingsGroupBox.Name = "settingsGroupBox";
             this.settingsGroupBox.Size = new System.Drawing.Size(292, 62);
             this.settingsGroupBox.TabIndex = 1;
@@ -313,13 +316,12 @@
             // 
             // requirementsGroupBox
             // 
-            this.requirementsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.requirementsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.requirementsGroupBox.Controls.Add(this.label4);
             this.requirementsGroupBox.Controls.Add(this.label3);
             this.requirementsGroupBox.Controls.Add(this.label2);
             this.requirementsGroupBox.Controls.Add(this.label1);
-            this.requirementsGroupBox.Location = new System.Drawing.Point(1053, 253);
+            this.requirementsGroupBox.Location = new System.Drawing.Point(1053, 243);
             this.requirementsGroupBox.Name = "requirementsGroupBox";
             this.requirementsGroupBox.Size = new System.Drawing.Size(287, 62);
             this.requirementsGroupBox.TabIndex = 2;
@@ -378,8 +380,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this.viewInstructionsButton);
-            this.groupBox1.Location = new System.Drawing.Point(310, 253);
+            this.groupBox1.Location = new System.Drawing.Point(310, 243);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(160, 62);
             this.groupBox1.TabIndex = 6;
@@ -400,15 +403,23 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editDataToolStripMenuItem,
             this.reloadDataToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
+            // editDataToolStripMenuItem
+            // 
+            this.editDataToolStripMenuItem.Name = "editDataToolStripMenuItem";
+            this.editDataToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.editDataToolStripMenuItem.Text = "Edit Data";
+            this.editDataToolStripMenuItem.Click += new System.EventHandler(this.editDataToolStripMenuItem_Click);
+            // 
             // reloadDataToolStripMenuItem
             // 
             this.reloadDataToolStripMenuItem.Name = "reloadDataToolStripMenuItem";
-            this.reloadDataToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.reloadDataToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.reloadDataToolStripMenuItem.Text = "Reload Data";
             this.reloadDataToolStripMenuItem.ToolTipText = "Reloads the data.json file";
             this.reloadDataToolStripMenuItem.Click += new System.EventHandler(this.reloadDataToolStripMenuItem_Click);
@@ -448,18 +459,18 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1352, 321);
+            this.ClientSize = new System.Drawing.Size(1352, 311);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.requirementsGroupBox);
             this.Controls.Add(this.settingsGroupBox);
             this.Controls.Add(this.mainListView);
             this.Controls.Add(this.mainMenuStrip);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.mainMenuStrip;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Overwatch Counterpicker";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.ResizeEnd += new System.EventHandler(this.MainForm_ResizeEnd);
             this.settingsGroupBox.ResumeLayout(false);
             this.settingsGroupBox.PerformLayout();
             this.requirementsGroupBox.ResumeLayout(false);
@@ -515,6 +526,7 @@
         private System.Windows.Forms.ToolStripMenuItem dataStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reloadDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editDataToolStripMenuItem;
     }
 }
 

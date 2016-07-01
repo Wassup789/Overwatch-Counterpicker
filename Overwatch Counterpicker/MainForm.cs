@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Overwatch_Counterpicker;
 using Overwatch_Counterpicker.JSONObjects;
 using Overwatch_Team_Overview.JSONObjects;
 
@@ -17,13 +18,14 @@ namespace Overwatch_Team_Overview
     {
         public Settings settings = new Settings();
         public Data data = new Data();
+        private EditDataForm editDataForm;
 
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             if (!File.Exists("settings.json"))
             {
@@ -32,6 +34,10 @@ namespace Overwatch_Team_Overview
                 file.WriteLine(settingsString);
                 file.Close();
             }
+
+            MainForm_ResizeEnd(null, null);
+            MinimumSize = new Size(800, this.Height);
+            MaximumSize = new Size(Screen.AllScreens.Max(s => s.Bounds.Width), this.Height);
 
             RefreshData();
 
@@ -60,7 +66,7 @@ namespace Overwatch_Team_Overview
 
                 ListViewItem item = new ListViewItem();
                 item.UseItemStyleForSubItems = false;
-                item.Text = Program.heroes[heroIndex].First().ToString().ToUpper() + Program.heroes[heroIndex].Substring(1);
+                item.Text = Program.GetHeroName(heroIndex);
                 item.Group = mainListView.Groups[0];
 
                 for (int j = 0; j < Program.heroes.Length; j++)
@@ -114,6 +120,7 @@ namespace Overwatch_Team_Overview
                 itemOverall.SubItems.Add(subitem);
             }
             mainListView.Items.Add(itemOverall);
+            MainForm_ResizeEnd(null, null);
         }
 
         private void mainListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -179,6 +186,27 @@ namespace Overwatch_Team_Overview
         private void reloadDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RefreshData();
+        }
+
+        private void editDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (editDataForm == null || editDataForm.IsDisposed)
+            {
+                editDataForm = new EditDataForm(this);
+                editDataForm.Show();
+            }
+            else if (!editDataForm.IsDisposed)
+            {
+                editDataForm.Focus();
+            }
+        }
+        
+        private void MainForm_ResizeEnd(object sender, EventArgs e)
+        {
+            foreach (ColumnHeader column in mainListView.Columns)
+            {
+                column.Width = -2;
+            }
         }
     }
 }

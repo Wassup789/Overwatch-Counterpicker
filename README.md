@@ -38,46 +38,14 @@ This application simply screenshots the primary monitor (therefore why you have 
 
 ## Editing the Data
 
-The counterpick data can be edited by editing the included data.json file.
+The counterpick data can be edited by launching "Overwatch Picker, and going to: Tools->Edit Data.
 
-The data.json file include is a two-dimensional array *(aka table)* where the rows and columns correspond to the Overwatch heroes in the following order:
-
- - Genji
- - McCree
- - Pharah
- - Reaper
- - Soldier: 76
- - Tracer
- - Bastion
- - Hanzo
- - Junkrat
- - Mei
- - Torbjorn
- - Widowmaker
- - D.Va
- - Reinhardt
- - Roadhog
- - Winston
- - Zarya
- - Lucio
- - Mercy
- - Symmetra
- - Zenyatta
+The first column will correspond to the hero you will be playing. The other columns will determine how well this hero will do against other heroes.
 
 #### The only accepted values are:
  - -1 (Weak against this hero)
  - 0 (Neutral against this hero)
  - 1 (Strong against this hero)
-
-#### For example...
-
-In the data.json file, line #5:
-
- - The enemy plays as Genji
- - The values correspond to how well the enemy (Genji) will do against the other heroes (Use the heroes list above for guidance).
-
-For line #6, the player now plays McCree.
-For line #7, the player plays Pharah instead, etc.
 
 ## Downloads
 **Latest Version:** ***[vX.X.X.X][Dld_Latest]***

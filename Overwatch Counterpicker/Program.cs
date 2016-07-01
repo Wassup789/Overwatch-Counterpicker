@@ -197,5 +197,16 @@ namespace Overwatch_Team_Overview
                 return imgToResize;
             }
         }
+
+        public static string GetHeroName(int index)
+        {
+            string heroName = Program.heroes[index].ToCharArray()[0].ToString().ToUpper() +
+                              Program.heroes[index].Substring(1);
+            if (heroName == "Soldier76")
+                heroName = "Soldier: 76";
+            if (heroName == "Dva")
+                heroName = "D.Va";
+            return heroName;
+        }
     }
 }
