@@ -1,29 +1,29 @@
-﻿using Gma.System.MouseKeyHook;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using Overwatch_Counterpicker;
 
 namespace Overwatch_Team_Overview
 {
 
     static class Program
     {
-        public static IKeyboardMouseEvents m_GlobalHook;
         public static MainForm mainForm;
         public static bool debug = false;
+        private static Stopwatch debugTimer;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main()
         {
-            m_GlobalHook = Hook.GlobalEvents();
-            m_GlobalHook.KeyPress += GlobalHookKeyPress;
+            KeyHook keyHook = new KeyHook();
+            KeyHook.OnKeyPress += OnKeyPress;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -31,15 +31,15 @@ namespace Overwatch_Team_Overview
             mainForm = new MainForm();
 
             Application.Run(mainForm);
+            keyHook.Stop();
         }
 
-        private static void GlobalHookKeyPress(object sender, KeyPressEventArgs e)
+        private static void OnKeyPress(int keyCode)
         {
-            // User has pressed the G key
-            if (e.KeyChar == mainForm.settings.key.ToCharArray()[0]) {
+            debugTimer = System.Diagnostics.Stopwatch.StartNew();
+            if (keyCode == mainForm.settings.key.ToUpper().ToCharArray()[0])
                 TakeScreenshot();
-            }
-            if (e.KeyChar == ']' && debug)
+            if (keyCode == ']' && debug)
                 TakeScreenshotAsset();
         }
 
@@ -107,11 +107,6 @@ namespace Overwatch_Team_Overview
                         CompareColors(colorsSourceDead, colorsTest)
                     };
                     percentages[i][j] = results[GetBestValue(results)];
-                    if (i == 1)
-                    {
-                        Console.WriteLine(heroes[j] + percentages[i][j][0]);
-                        Console.WriteLine(heroes[j] + percentages[i][j][1]);
-                    }
                 }
             }
             for (int i = 0; i < positions.Length; i++)
@@ -121,6 +116,8 @@ namespace Overwatch_Team_Overview
                 currentHeroes[i] = index;
             }
             hasRefreshedOnce = true;
+            debugTimer.Stop();
+            Console.WriteLine(debugTimer.ElapsedMilliseconds);
             mainForm.onHeroesChange();
         }
 
@@ -165,18 +162,18 @@ namespace Overwatch_Team_Overview
             {
                 changeInR += (image1[i].R - image2[i].R);
                 changeInG += (image1[i].G - image2[i].G);
-                changeInB += (image1[i].R - image2[i].B);
+                changeInB += (image1[i].B - image2[i].B);
 
-                if ((image1[i].R - image2[i].R < 10 && image1[i].R - image2[i].R > -10) &&
-                    (image1[i].G - image2[i].G < 10 && image1[i].G - image2[i].G > -10) &&
-                    (image1[i].B - image2[i].B < 10 && image1[i].B - image2[i].B > -10))
+                if ((image1[i].R - image2[i].R < 30 && image1[i].R - image2[i].R > -30) &&
+                    (image1[i].G - image2[i].G < 30 && image1[i].G - image2[i].G > -30) &&
+                    (image1[i].B - image2[i].B < 30 && image1[i].B - image2[i].B > -30))
                     accuracy++;
             }
-            changeInR = Math.Abs(changeInR/image1.Count)/255.0*100.0;
-            changeInG = Math.Abs(changeInG/image1.Count)/255.0*100.0;
-            changeInB = Math.Abs(changeInB/image1.Count)/255.0*100.0;
-
-            return new double[] {(changeInR + changeInG + changeInB)/3.0, (accuracy/image1.Count*100.0)};
+            changeInR = Math.Abs(changeInR/image1.Count);
+            changeInG = Math.Abs(changeInG/image1.Count);
+            changeInB = Math.Abs(changeInB/image1.Count);
+            
+            return new double[] {(changeInR + changeInG + changeInB)/3.0/255.0*100.0, (accuracy/image1.Count*100.0)};
         }
 
         public static void TakeScreenshot()
